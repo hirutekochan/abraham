@@ -1,0 +1,27 @@
+              currentInput = currentInput.slice(0, -1);
+              document.getElementById("answer").textContent = currentInput;
+          }
+
+          function checkAnswer() {
+              if (currentInput === answers[currentQuestion - 1]) {
+                  currentQuestion++;
+                  if (currentQuestion <= questions.length) {
+                      document.getElementById("question").textContent = questions[currentQuestion - 1];
+                      currentInput = "";
+                      document.getElementById("answer").textContent = "";
+                  } else {
+                      const endTime = new Date().getTime();
+                      const elapsedTime = (endTime - startTime) / 1000;
+                      alert("クリア！かかった時間：" + elapsedTime + "秒");
+                  }
+              } else {
+                  currentInput = "";
+                  document.getElementById("answer").textContent = "";
+              }
+          }
+
+          let startTime = new Date().getTime();
+          document.getElementById("question").textContent = questions[currentQuestion - 1];
+      </script>
+</body>
+</html>
