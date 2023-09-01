@@ -12,7 +12,7 @@
             margin: 0;
             padding: 10px;
             font-family: 'Kosugi', sans-serif;
-            color: blue; /* フォントの色を青に設定 */
+            color: #66a0e2; /* フォントの色を青に設定 */
         }
         #question, #answer {
             text-align: center;
@@ -36,9 +36,10 @@
             position: fixed;
             bottom: 0;
             left: 0;
-            width: 100%;
+            /*width: 100%;*/
+            width: calc(100% / 6); 
             background-color: #f0f0f0;
-            padding: 10px;
+            /*padding: 10px; */
             font-family: 'Kosugi', sans-serif;
             white-space: nowrap; /* テキストが折り返さないように設定 */
             overflow: hidden; /* テキストがボタンからはみ出ないように設定 */
@@ -90,7 +91,7 @@
         }
         /* 問題と回答の間のスペース */
         .spacer {
-            height: 20px; /* 適切なスペースの高さを設定 */
+            height: 50px; /* 適切なスペースの高さを設定 */
         }
     </style>
 </head>
