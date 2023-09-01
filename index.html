@@ -1,122 +1,228 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
-      <title>!アブラハムクイズ!</title>
-      <style>
-          body {
-             text-align: center; /* テキストを中央揃えにする */
-          }
-          h1, h2 {
-              margin: 0; /* マージンをリセットして中央に配置 */
-              padding: 10px; /* 内側の余白を追加 */
-          }
-          #question, #answer {
-              text-align: center; /* テキストを中央揃えにする */
-          }
-          .button-row {
-              display: flex;
-              justify-content: center; /* ボタンを中央に配置 */
-          }
-          button {
-              width: 60px; /* ボタンの幅を調整 */
-              height: 60px; /* ボタンの高さを調整 */
-              font-size: 24px; /* フォントサイズを調整 */
-              font-align: center; /* 文字の位置を中央ぞろえにできる? */
-          }
-          .button-container {
-              position: fixed;
-              bottom: 0;
-              left: 0;
-              width: 100%;
-              background-color: #f0f0f0; /* ボタンの背景色を設定 */
-              padding: 10px; /* 必要に応じてパディングを調整 */
-          }
-            /* "回答"ボタンのスタイル */
-            .large-button {
-                width: 100px; /* 例えば、"回答"ボタンの幅を大きく調整 */
-                height: 60px; /* 必要に応じて高さを調整 */
-                font-size: 24px;
-                font-align: center; /* font-align ではなく text-align を使用 */
-            }
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kosugi&display=swap">
+    <title>!アブラハムクイズ!</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Kosugi', sans-serif;
+        }
+        h1, h2 {
+            margin: 0;
+            padding: 10px;
+            font-family: 'Kosugi', sans-serif;
+            color: blue; /* フォントの色を青に設定 */
+        }
+        #question, #answer {
+            text-align: center;
+            font-size: 40px; /* 問題のフォントサイズを小さく変更 */
+            font-family: 'Kosugi', sans-serif;
+        }
+        .button-row {
+            display: flex;
+            justify-content: center;
+        }
+        .button {
+            width: calc(100% / 6); /* 画面幅を等分割する幅に調整 */
+            height: 80px;
+            font-size: 24px;
+            text-align: center;
+            line-height: 80px;
+            font-family: 'Kosugi', sans-serif;
+        }
+        .button-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f0f0f0;
+            padding: 10px;
+            font-family: 'Kosugi', sans-serif;
+        }
+        /* "回答"ボタンのスタイル */
+        .large-button {
+            max-width: 100%; /* ボタンの幅が画面を超えないようにする */
+            width: 120px; /* 幅を指定して、最大幅に達しない場合はこの幅を使用 */
+            height: 100px;
+            font-size: 50px;
+            text-align: center;
+            line-height: 100px;
+            font-family: 'Kosugi', sans-serif;
+        }
+        
+        /* 「回答」ボタンに対するスタイル */
+        #checkAnswerButton {
+            width: 120px;
+        }
 
-      </style>
+        /* スタートボタンのスタイル */
+        .start-button {
+            width: 160px; /* ボタンの幅を調整 */
+            height: 80px;
+            font-size: 24px;
+            text-align: center;
+            line-height: 80px;
+            font-family: 'Kosugi', sans-serif;
+        }
+        /* "×"ボタンのスタイル */
+        .clear-button {
+            background-color: red; /* 背景色を赤色に設定 */
+            color: white; /* 文字色を白に設定 */
+            width: 100px;
+            height: 100px;
+            font-size: 50px;
+            text-align: center;
+            line-height: 100px;
+            font-family: 'Kosugi', sans-serif;
+        }
 
+
+        
+    </style>
 </head>
 <body>
-      <h1>問題</h1>
-      <div id="question">10人の乙女、用意したりしなかったりしたものは?</div>
+<div id="startPopup" class="popup">
+    <h3>ゲームスタート</h3>
+    <!--<button onclick="startGame()">スタート</button>-->
+    <button class="start-button" onclick="startGame()">スタート</button>
+</div>
 
-      <h2>回答</h2>
-      <div id="answer"></div>
+<div id="gameContent" style="display: none;">
+    <!-- ゲームのコンテンツや質問など -->
+    <h1>問題</h1>
+    <div id="question">10人の乙女、用意したりしなかったりしたものは?</div>
 
-      <div class="button-container">
-           <div class="button-row">
-               <button class="large-button" onclick="appendCharacter('ア')">ア</button>
-               <button class="large-button" onclick="appendCharacter('ブ')">ブ</button>
-               <button class="large-button" onclick="appendCharacter('ラ')">ラ</button>
-               <button class="large-button" onclick="appendCharacter('ハ')">ハ</button>
-               <button class="large-button" onclick="appendCharacter('ム')">ム</button>
-               <button class="large-button" onclick="clearCharacter()">×</button>
-           </div>
-           <div class="button-row">
-               <button class="large-button" onclick="checkAnswer()">回答</button>
-           </div>
-      </div>
-      
-      <script>
-          let currentQuestion = 1;
-          const questions = [
-              "10人の乙女、用意したりしなかったりしたものは?",
-              "10の災い、4つめの災いは?",
-              "アブラハム、改名前の名前は?",
-              "2人の斥候を匿った遊女の名前は?",
-              "ノアの息子、セム、ヤペテ、もう一人は?",
-              "信仰の父は?"
-          ];
-          const answers = [
-              "アブラ",
-              "アブ",
-              "アブラム",
-              "ラハブ",
-              "ハム",
-              "アブラハム"
-          ];
-          let currentInput = "";
+    <h2>回答</h2>
+    <div id="answer"></div>
+</div>
 
-          function appendCharacter(character) {
-              currentInput += character;
-              document.getElementById("answer").textContent = currentInput;
-          }
+<div id="popup" class="popup" style="display: none;">
+    <h3>ゲーム終了！</h3>
+    <p>結果を確認しました。</p>
+    <button onclick="restartGame()">再度プレイ</button>
+</div>
 
-          function clearCharacter() {
-              currentInput = currentInput.slice(0, -1);
-              document.getElementById("answer").textContent = currentInput;
-          }
+<div id="backButton" class="popup" style="display: none;">
+    <button onclick="goBack()">戻る</button>
+</div>
 
-          function checkAnswer() {
-              if (currentInput === answers[currentQuestion - 1]) {
-                  currentQuestion++;
-                  if (currentQuestion <= questions.length) {
-                      document.getElementById("question").textContent = questions[currentQuestion - 1];
-                      currentInput = "";
-                      document.getElementById("answer").textContent = "";
-                  } else {
-                      const endTime = new Date().getTime();
-                      const elapsedTime = (endTime - startTime) / 1000;
-                      alert("クリア！かかった時間：" + elapsedTime + "秒");
-                  }
-              } else {
-                  currentInput = "";
-                  document.getElementById("answer").textContent = "";
-              }
-          }
+<div class="button-container">
+    <div class="button-row">
+        <button class="large-button" onclick="appendCharacter('ア')">ア</button>
+        <button class="large-button" onclick="appendCharacter('ブ')">ブ</button>
+        <button class="large-button" onclick="appendCharacter('ラ')">ラ</button>
+        <button class="large-button" onclick="appendCharacter('ハ')">ハ</button>
+        <button class="large-button" onclick="appendCharacter('ム')">ム</button>
+        <!--<button class="large-button" onclick="clearCharacter()">×</button>-->
+        <button class="large-button clear-button" onclick="clearCharacter()">×</button>
 
-          let startTime = new Date().getTime();
-          document.getElementById("question").textContent = questions[currentQuestion - 1];
-      </script>
+    </div>
+    <div class="button-row">
+        <!--<button class="large-button" onclick="checkAnswer()">回答</button>-->
+        <button class="large-button" id="checkAnswerButton" onclick="checkAnswer()">回答</button>
+    </div>
+</div>
+
+<script>
+    let currentQuestion = 1;
+    const questions = [
+        "10人の乙女、用意したりしなかったりしたものは?",
+        "10の災い、4つめの災いは?",
+        "アブラハム、改名前の名前は?",
+        "2人の斥候を匿った遊女の名前は?",
+        "ノアの息子、セム、ヤペテ、もう一人は?",
+        "信仰の父は?"
+    ];
+    const answers = [
+        "アブラ",
+        "アブ",
+        "アブラム",
+        "ラハブ",
+        "ハム",
+        "アブラハム"
+    ];
+    let currentInput = "";
+
+    function appendCharacter(character) {
+        currentInput += character;
+        document.getElementById("answer").textContent = currentInput;
+    }
+
+    function clearCharacter() {
+        currentInput = currentInput.slice(0, -1);
+        document.getElementById("answer").textContent = currentInput;
+    }
+
+    function checkAnswer() {
+        if (currentInput === answers[currentQuestion - 1]) {
+            currentQuestion++;
+            if (currentQuestion <= questions.length) {
+                document.getElementById("question").textContent = questions[currentQuestion - 1];
+                currentInput = "";
+                document.getElementById("answer").textContent = "";
+            } else {
+                const endTime = new Date().getTime();
+                const elapsedTime = (endTime - startTime) / 1000;
+                alert("クリア！かかった時間：" + elapsedTime + "秒");
+                document.getElementById("gameContent").style.display = "none";
+                document.getElementById("backButton").style.display = "block";
+            }
+        } else {
+            currentInput = "";
+            document.getElementById("answer").textContent = "";
+        }
+    }
+
+    let startTime = new Date().getTime();
+    document.getElementById("question").textContent = questions[currentQuestion - 1];
+
+    // ゲーム開始ポップアップを表示する
+    function showStartPopup() {
+        document.getElementById("startPopup").style.display = "block";
+        document.getElementById("gameContent").style.display = "none"; // ゲームコンテンツを非表示
+        document.getElementById("backButton").style.display = "none"; // 戻るボタンを非表示
+    }
+
+    // ゲームを開始する
+    function startGame() {
+        document.getElementById("startPopup").style.display = "none";
+        document.getElementById("gameContent").style.display = "block"; // ゲームコンテンツを表示
+        document.getElementById("backButton").style.display = "none"; // 戻るボタンを非表示
+        // ゲームの初期化と問題の表示などの処理を追加
+        currentQuestion = 1;
+        document.getElementById("question").textContent = questions[currentQuestion - 1];
+        currentInput = "";
+        document.getElementById("answer").textContent = "";
+    }
+
+    // ゲーム終了時にポップアップを表示
+    function endGame() {
+        document.getElementById("popup").style.display = "block";
+        // ゲームの結果を表示する処理を追加
+    }
+
+    // ゲームを再度プレイするための処理
+    function restartGame() {
+        document.getElementById("popup").style.display = "none";
+        // ゲームを初期状態にリセットする処理を追加
+        currentQuestion = 1;
+        document.getElementById("question").textContent = questions[currentQuestion - 1];
+        currentInput = "";
+        document.getElementById("answer").textContent = "";
+        showStartPopup();
+    }
+
+    // 「戻る」ボタンをクリックしてゲームスタート画面に戻る
+    function goBack() {
+        document.getElementById("backButton").style.display = "none";
+        showStartPopup();
+    }
+
+    // ページ読み込み時にゲーム開始ポップアップを表示
+    window.onload = function() {
+        showStartPopup();
+    };
+</script>
 </body>
 </html>
-
-
