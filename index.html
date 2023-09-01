@@ -87,6 +87,9 @@
             line-height: 180px;
             font-family: 'Kosugi', sans-serif;
             margin: 0 auto; /* 水平方向に中央寄せ */
+            white-space: nowrap; /* テキストが折り返さないように設定 */
+            overflow: hidden; /* テキストがボタンからはみ出ないように設定 */
+            text-overflow: ellipsis; /* テキストがはみ出た場合に省略記号 (...) を表示 */
         }
         /* "戻る"ボタンのスタイル */
         .back-button {
