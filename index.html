@@ -33,6 +33,14 @@
               background-color: #f0f0f0; /* ボタンの背景色を設定 */
               padding: 10px; /* 必要に応じてパディングを調整 */
           }
+            /* "回答"ボタンのスタイル */
+            .large-button {
+                width: 100px; /* 例えば、"回答"ボタンの幅を大きく調整 */
+                height: 60px; /* 必要に応じて高さを調整 */
+                font-size: 24px;
+                font-align: center; /* font-align ではなく text-align を使用 */
+            }
+
       </style>
 
 </head>
@@ -45,18 +53,18 @@
 
       <div class="button-container">
            <div class="button-row">
-               <button onclick="appendCharacter('ア')">ア</button>
-               <button onclick="appendCharacter('ブ')">ブ</button>
-               <button onclick="appendCharacter('ラ')">ラ</button>
-               <button onclick="appendCharacter('ハ')">ハ</button>
-               <button onclick="appendCharacter('ム')">ム</button>
-               <button onclick="clearCharacter()">×</button>
+               <button class="large-button" onclick="appendCharacter('ア')">ア</button>
+               <button class="large-button" onclick="appendCharacter('ブ')">ブ</button>
+               <button class="large-button" onclick="appendCharacter('ラ')">ラ</button>
+               <button class="large-button" onclick="appendCharacter('ハ')">ハ</button>
+               <button class="large-button" onclick="appendCharacter('ム')">ム</button>
+               <button class="large-button" onclick="clearCharacter()">×</button>
            </div>
            <div class="button-row">
-               <button onclick="checkAnswer()">回答</button>
+               <button class="large-button" onclick="checkAnswer()">回答</button>
            </div>
       </div>
-
+      
       <script>
           let currentQuestion = 1;
           const questions = [
