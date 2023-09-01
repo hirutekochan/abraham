@@ -23,7 +23,7 @@
             display: flex;
             justify-content: center;
         }
-/*        .button {
+        .button {
             width: calc(100% / 6); /* 画面幅を等分割する幅に調整 */
             /*height: 180px;*/
             /*height: 240px;
@@ -32,7 +32,7 @@
             line-height: 180px;
             line-width: calc(100% / 6);
             font-family: 'Kosugi', sans-serif;
-        }*/
+        }
         .button-container {
             position: fixed;
             bottom: 0;
@@ -53,7 +53,7 @@
             font-size: 50px;
             text-align: center;
             line-height: 120px;
-            line-width: 200px;
+            /*line-width: 200px;*/
             font-family: 'Kosugi', sans-serif;
             white-space: nowrap; /* テキストが折り返さないように設定 */
             overflow: hidden; /* テキストがボタンからはみ出ないように設定 */
@@ -62,7 +62,7 @@
         }
         /* 「回答」ボタンに対するスタイル */
         #checkAnswerButton {
-            width: 200px; /* 「回答」ボタンの幅を変更 */
+            width: 360px; /* 「回答」ボタンの幅を変更 */
         }
         /* スタートボタンのスタイル */
         .start-button {
@@ -89,10 +89,10 @@
         }
         /* "戻る"ボタンのスタイル */
         .back-button {
-            width: 200px; /* 幅を大きく設定 */
-            height: 100px; /* 高さを大きく設定 */
+            width: 360px; /* 幅を大きく設定 */
+            height: 180px; /* 高さを大きく設定 */
             font-size: 40px; /* フォントサイズを大きく設定 */
-            line-height: 100px; /* テキストの中央揃え */
+            line-height: 180px; /* テキストの中央揃え */
             font-family: 'Kosugi', sans-serif;
             margin: 0 auto; /* 水平方向に中央寄せ */
         }
@@ -127,7 +127,7 @@
     <button onclick="restartGame()">再度プレイ</button>
 </div>
 <div id="backButton" class="popup" style="display: none;">
-    <button class="back-button" onclick="restartGame()">戻る</button>
+    <button class="back-button" onclick="restartGame()">再挑戦</button>
 </div>
 
 <div class="button-container">
