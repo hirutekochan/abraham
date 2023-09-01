@@ -12,7 +12,7 @@
             margin: 0;
             padding: 10px;
             font-family: 'Kosugi', sans-serif;
-            color: #66a0e2; /* フォントの色を青に設定 */
+            color: blue; /* フォントの色を青に設定 */
         }
         #question, #answer {
             text-align: center;
@@ -32,23 +32,18 @@
             line-height: 80px;
             font-family: 'Kosugi', sans-serif;
         }
-/*        .button-container {
+        .button-container {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
             background-color: #f0f0f0;
             padding: 10px;
-            font-family: 'Kosugi', sans-serif;*/
+            font-family: 'Kosugi', sans-serif;
             white-space: nowrap; /* テキストが折り返さないように設定 */
             overflow: hidden; /* テキストがボタンからはみ出ないように設定 */
             text-overflow: ellipsis; /* テキストがはみ出た場合に省略記号 (...) を表示 */
-            position: absolute;
-            top: 50%; /* 上から50%の位置に配置 */
-            left: 50%; /* 左から50%の位置に配置 */
-            transform: translate(-50%, -50%); /* 中央揃えにする */
         }
-
         /* "回答"ボタンのスタイル */
         .large-button {
             max-width: 100%; /* ボタンの幅が画面を超えないようにする */
@@ -62,19 +57,13 @@
             overflow: hidden; /* テキストがボタンからはみ出ないように設定 */
             text-overflow: ellipsis; /* テキストがはみ出た場合に省略記号 (...) を表示 */
         }
-        
-        /* 「回答」ボタンに対するスタイル */
-        #checkAnswerButton {
-            width: 120px;
-        }
-
         /* スタートボタンのスタイル */
         .start-button {
             width: 360px; /* ボタンの幅を調整 */
             height: 180px;
             font-size: 40px;
             text-align: center;
-            line-height: 80px;
+            line-height: 180px; /* ボタン内でテキストを垂直中央揃え */
             font-family: 'Kosugi', sans-serif;
         }
         /* "×"ボタンのスタイル */
@@ -90,22 +79,13 @@
         }
         /* "戻る"ボタンのスタイル */
         .back-button {
-            width: 100px; /* 幅を大きく設定 */
+            width: 200px; /* 幅を大きく設定 */
             height: 100px; /* 高さを大きく設定 */
-            font-size: 36px; /* フォントサイズを大きく設定 */
+            font-size: 40px; /* フォントサイズを大きく設定 */
             line-height: 100px; /* テキストの中央揃え */
-        }
-        #answer-container {
-            position: absolute;
-            top: 50%; /* 上から50%の位置に配置 */
-            left: 50%; /* 左から50%の位置に配置 */
-            transform: translate(-50%, -50%); /* 中央揃えにする */
-            font-size: 24px; /* フォントサイズを調整 */
-            color: #66a0e2; /* 好みの水色に設定 */
+            font-family: 'Kosugi', sans-serif;
         }
 
-
-        
     </style>
 </head>
 <body>
@@ -114,35 +94,27 @@
     <!--<button onclick="startGame()">スタート</button>-->
     <button class="start-button" onclick="startGame()">スタート</button>
 </div>
-
 <div id="gameContent" style="display: none;">
     <!-- ゲームのコンテンツや質問など -->
     <h1>問題</h1>
     <div id="question">10人の乙女、用意したりしなかったりしたものは?</div>
 
-    <div id="answer-container">
-        <h2>回答</h2>
-        <div id="answer"></div>
-    </div>
+    <h2>回答</h2>
+    <div id="answer"></div>
 </div>
 
 <div id="popup" class="popup" style="display: none;">
+
     <h3>ゲーム終了！</h3>
     <p>結果を確認しました。</p>
     <button onclick="restartGame()">再度プレイ</button>
 </div>
-
 <div id="backButton" class="popup" style="display: none;">
     <!--<button onclick="goBack()">戻る</button>-->
     <button class="back-button" onclick="restartGame()">戻る</button>
 </div>
-    
-<div class="button-container">
-    <button onclick="startGame()">スタート</button>
-    <button onclick="restartGame()">戻る</button>
-</div>
 
-<!--<div class="button-container">-->
+<div class="button-container">
     <div class="button-row">
         <button class="large-button" onclick="appendCharacter('ア')">ア</button>
         <button class="large-button" onclick="appendCharacter('ブ')">ブ</button>
@@ -151,16 +123,16 @@
         <button class="large-button" onclick="appendCharacter('ム')">ム</button>
         <!--<button class="large-button" onclick="clearCharacter()">×</button>-->
         <button class="large-button clear-button" onclick="clearCharacter()">×</button>
-
     </div>
     <div class="button-row">
         <!--<button class="large-button" onclick="checkAnswer()">回答</button>-->
         <button class="large-button" id="checkAnswerButton" onclick="checkAnswer()">回答</button>
     </div>
-<!--</div>-->
+</div>
 
 <script>
     let currentQuestion = 1;
+
     const questions = [
         "10人の乙女、用意したりしなかったりしたものは?",
         "10の災い、4つめの災いは?",
@@ -224,6 +196,7 @@
         document.getElementById("startPopup").style.display = "none";
         document.getElementById("gameContent").style.display = "block"; // ゲームコンテンツを表示
         document.getElementById("backButton").style.display = "none"; // 戻るボタンを非表示
+
         // ゲームの初期化と問題の表示などの処理を追加
         currentQuestion = 1;
         document.getElementById("question").textContent = questions[currentQuestion - 1];
