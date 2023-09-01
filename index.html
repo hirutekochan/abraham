@@ -14,27 +14,24 @@
             font-size: 40px;
             color: #66a0e2; /* フォントの色を青に設定 */
         }
-        .button {
-            width: 180px; /* 幅を指定して、最大幅に達しない場合はこの幅を使用 */
-            height: 120px;
-            font-size: 50px;
+        #question, #answer {
             text-align: center;
-            line-height: 120px;
+            font-size: 40px; /* 問題のフォントサイズを小さく変更 */
             font-family: 'Kosugi', sans-serif;
-            white-space: nowrap; /* テキストが折り返さないように設定 */
-            overflow: hidden; /* テキストがボタンからはみ出ないように設定 */
-            text-overflow: ellipsis; /* テキストがはみ出た場合に省略記号 (...) を表示 */
-            margin: 0 auto; /* 水平方向に中央寄せ */
         }
-        /* "×"ボタンのスタイル */
-        .clear-button {
-            background-color: red; /* 背景色を赤色に設定 */
-            color: white; /* 文字色を白に設定 */
+        .button-row {
+            display: flex;
+            justify-content: center;
         }
-        /* "回答"ボタンのスタイル */
-        .large-button {
-            background-color: #66a0e2; /* ボタンの背景色を青に設定 */
-            color: white; /* 文字色を白に設定 */
+        .button {
+            /*width: calc(100% / 6); /* 画面幅を等分割する幅に調整 */
+            width: 120px;
+            height: 180px;
+            font-size: 24px;
+            text-align: center;
+            line-height: 180px;
+            line-width: 120px;
+            font-family: 'Kosugi', sans-serif;
         }
         .button-container {
             position: fixed;
@@ -47,11 +44,70 @@
             overflow: hidden; /* テキストがボタンからはみ出ないように設定 */
             text-overflow: ellipsis; /* テキストがはみ出た場合に省略記号 (...) を表示 */
         }
+        /* "回答"ボタンのスタイル */
+        .large-button {
+            width: 180px; /* 幅を指定して、最大幅に達しない場合はこの幅を使用 */
+            height: 120px;
+            font-size: 50px;
+            text-align: center;
+            line-height: 120px;
+            line-width: 180px;
+            font-family: 'Kosugi', sans-serif;
+            white-space: nowrap; /* テキストが折り返さないように設定 */
+            overflow: hidden; /* テキストがボタンからはみ出ないように設定 */
+            text-overflow: ellipsis; /* テキストがはみ出た場合に省略記号 (...) を表示 */
+            margin: 0 auto; /* 水平方向に中央寄せ */
+        }
+        /* 「回答」ボタンに対するスタイル */
+        #checkAnswerButton {
+            width: 120px; /* 「回答」ボタンの幅を変更 */
+        }
+        /* スタートボタンのスタイル */
+        .start-button {
+            width: 360px; /* ボタンの幅を調整 */
+            height: 180px;
+            font-size: 40px;
+            text-align: center;
+            line-height: 180px; /* ボタン内でテキストを垂直中央揃え */
+            font-family: 'Kosugi', sans-serif;
+            margin: 0 auto; /* 水平方向に中央寄せ */
+        }
+        /* "×"ボタンのスタイル */
+        .clear-button {
+            background-color: red; /* 背景色を赤色に設定 */
+            color: white; /* 文字色を白に設定 */
+            width: 120px;
+            height: 180px;
+            font-size: 50px;
+            text-align: center;
+            line-height: 180px;
+            font-family: 'Kosugi', sans-serif;
+            margin: 0 auto; /* 水平方向に中央寄せ */
+        }
+        /* "戻る"ボタンのスタイル */
+        .back-button {
+            width: 200px; /* 幅を大きく設定 */
+            height: 100px; /* 高さを大きく設定 */
+            font-size: 40px; /* フォントサイズを大きく設定 */
+            line-height: 100px; /* テキストの中央揃え */
+            font-family: 'Kosugi', sans-serif;
+            margin: 0 auto; /* 水平方向に中央寄せ */
+        }
+        /* 問題と回答の間のスペース */
+        .spacer {
+            height: 80px; /* 適切なスペースの高さを設定 */
+        }
+        /* ボタン間の隙間用のスタイル */
+        .button-spacing {
+            width: 20px; /* 適切な隙間の幅を設定 */
+            height: 100px;
+        }
+
     </style>
 </head>
 <body>
 <div id="startPopup" class="popup">
-    <button class="button large-button" onclick="startGame()">スタート</button>
+    <button class="start-button" onclick="startGame()">スタート</button>
 </div>
 <div id="gameContent" style="display: none;">
     <!-- ゲームのコンテンツや質問など -->
@@ -65,24 +121,24 @@
 <div id="popup" class="popup" style="display: none;">
     <h3>ゲーム終了！</h3>
     <p>結果を確認しました。</p>
-    <button class="button large-button" onclick="restartGame()">再度プレイ</button>
+    <button onclick="restartGame()">再度プレイ</button>
 </div>
 <div id="backButton" class="popup" style="display: none;">
-    <button class="button large-button" onclick="restartGame()">戻る</button>
+    <button class="back-button" onclick="restartGame()">戻る</button>
 </div>
 
 <div class="button-container">
     <div class="button-row">
-        <button class="button" onclick="appendCharacter('ア')">ア</button>
-        <button class="button" onclick="appendCharacter('ブ')">ブ</button>
-        <button class="button" onclick="appendCharacter('ラ')">ラ</button>
-        <button class="button" onclick="appendCharacter('ハ')">ハ</button>
-        <button class="button" onclick="appendCharacter('ム')">ム</button>
-        <button class="button clear-button" onclick="clearCharacter()">×</button>
+        <button class="large-button" onclick="appendCharacter('ア')">ア</button>
+        <button class="large-button" onclick="appendCharacter('ブ')">ブ</button>
+        <button class="large-button" onclick="appendCharacter('ラ')">ラ</button>
+        <button class="large-button" onclick="appendCharacter('ハ')">ハ</button>
+        <button class="large-button" onclick="appendCharacter('ム')">ム</button>
+        <button class="clear-button" onclick="clearCharacter()">×</button>
     </div>
     <div class="button-spacing"></div> <!-- 隙間用の要素を追加 -->
     <div class="button-row">
-        <button class="button large-button" id="checkAnswerButton" onclick="checkAnswer()">回答</button>
+        <button class="large-button" id="checkAnswerButton" onclick="checkAnswer()">回答</button>
     </div>
 </div>
 
