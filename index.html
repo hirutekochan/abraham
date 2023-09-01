@@ -12,7 +12,7 @@
             margin: 0;
             padding: 10px;
             font-family: 'Kosugi', sans-serif;
-            color: blue; /* フォントの色を青に設定 */
+            color: #66a0e2; /* フォントの色を青に設定 */
         }
         #question, #answer {
             text-align: center;
@@ -32,18 +32,23 @@
             line-height: 80px;
             font-family: 'Kosugi', sans-serif;
         }
-        .button-container {
+/*        .button-container {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
             background-color: #f0f0f0;
             padding: 10px;
-            font-family: 'Kosugi', sans-serif;
+            font-family: 'Kosugi', sans-serif;*/
             white-space: nowrap; /* テキストが折り返さないように設定 */
             overflow: hidden; /* テキストがボタンからはみ出ないように設定 */
             text-overflow: ellipsis; /* テキストがはみ出た場合に省略記号 (...) を表示 */
+            position: absolute;
+            top: 50%; /* 上から50%の位置に配置 */
+            left: 50%; /* 左から50%の位置に配置 */
+            transform: translate(-50%, -50%); /* 中央揃えにする */
         }
+
         /* "回答"ボタンのスタイル */
         .large-button {
             max-width: 100%; /* ボタンの幅が画面を超えないようにする */
@@ -90,6 +95,14 @@
             font-size: 36px; /* フォントサイズを大きく設定 */
             line-height: 100px; /* テキストの中央揃え */
         }
+        #answer-container {
+            position: absolute;
+            top: 50%; /* 上から50%の位置に配置 */
+            left: 50%; /* 左から50%の位置に配置 */
+            transform: translate(-50%, -50%); /* 中央揃えにする */
+            font-size: 24px; /* フォントサイズを調整 */
+            color: #66a0e2; /* 好みの水色に設定 */
+        }
 
 
         
@@ -107,8 +120,10 @@
     <h1>問題</h1>
     <div id="question">10人の乙女、用意したりしなかったりしたものは?</div>
 
-    <h2>回答</h2>
-    <div id="answer"></div>
+    <div id="answer-container">
+        <h2>回答</h2>
+        <div id="answer"></div>
+    </div>
 </div>
 
 <div id="popup" class="popup" style="display: none;">
@@ -121,8 +136,13 @@
     <!--<button onclick="goBack()">戻る</button>-->
     <button class="back-button" onclick="restartGame()">戻る</button>
 </div>
-
+    
 <div class="button-container">
+    <button onclick="startGame()">スタート</button>
+    <button onclick="restartGame()">戻る</button>
+</div>
+
+<!--<div class="button-container">-->
     <div class="button-row">
         <button class="large-button" onclick="appendCharacter('ア')">ア</button>
         <button class="large-button" onclick="appendCharacter('ブ')">ブ</button>
@@ -137,7 +157,7 @@
         <!--<button class="large-button" onclick="checkAnswer()">回答</button>-->
         <button class="large-button" id="checkAnswerButton" onclick="checkAnswer()">回答</button>
     </div>
-</div>
+<!--</div>-->
 
 <script>
     let currentQuestion = 1;
