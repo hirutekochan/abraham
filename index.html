@@ -1,3 +1,88 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+      <title>!アブラハムクイズ!</title>
+      <style>
+          body {
+             text-align: center; /* テキストを中央揃えにする */
+          }
+          h1, h2 {
+              margin: 0; /* マージンをリセットして中央に配置 */
+              padding: 10px; /* 内側の余白を追加 */
+          }
+          #question, #answer {
+              text-align: center; /* テキストを中央揃えにする */
+          }
+          .button-row {
+              display: flex;
+              justify-content: center; /* ボタンを中央に配置 */
+          }
+          button {
+              width: 60px; /* ボタンの幅を調整 */
+              height: 60px; /* ボタンの高さを調整 */
+              font-size: 24px; /* フォントサイズを調整 */
+              font-align: center; /* 文字の位置を中央ぞろえにできる? */
+          }
+          .button-container {
+              position: fixed;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              background-color: #f0f0f0; /* ボタンの背景色を設定 */
+              padding: 10px; /* 必要に応じてパディングを調整 */
+          }
+      </style>
+
+</head>
+<body>
+      <h1>問題</h1>
+      <div id="question">10人の乙女、用意したりしなかったりしたものは?</div>
+
+      <h2>回答</h2>
+      <div id="answer"></div>
+
+      <div class="button-container">
+           <div class="button-row">
+               <button onclick="appendCharacter('ア')">ア</button>
+               <button onclick="appendCharacter('ブ')">ブ</button>
+               <button onclick="appendCharacter('ラ')">ラ</button>
+               <button onclick="appendCharacter('ハ')">ハ</button>
+               <button onclick="appendCharacter('ム')">ム</button>
+               <button onclick="clearCharacter()">×</button>
+           </div>
+           <div class="button-row">
+               <button onclick="checkAnswer()">回答</button>
+           </div>
+      </div>
+
+      <script>
+          let currentQuestion = 1;
+          const questions = [
+              "10人の乙女、用意したりしなかったりしたものは?",
+              "10の災い、4つめの災いは?",
+              "アブラハム、改名前の名前は?",
+              "2人の斥候を匿った遊女の名前は?",
+              "ノアの息子、セム、ヤペテ、もう一人は?",
+              "信仰の父は?"
+          ];
+          const answers = [
+              "アブラ",
+              "アブ",
+              "アブラム",
+              "ラハブ",
+              "ハム",
+              "アブラハム"
+          ];
+          let currentInput = "";
+
+          function appendCharacter(character) {
+              currentInput += character;
+              document.getElementById("answer").textContent = currentInput;
+          }
+
+          function clearCharacter() {
               currentInput = currentInput.slice(0, -1);
               document.getElementById("answer").textContent = currentInput;
           }
@@ -25,3 +110,5 @@
       </script>
 </body>
 </html>
+
+
