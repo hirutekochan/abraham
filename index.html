@@ -8,10 +8,10 @@
             text-align: center;
             font-family: 'Kosugi', sans-serif;
         }
-        h1, h2 {
+        .header {
             margin: 0;
             padding: 10px;
-            font-family: 'Kosugi', sans-serif;
+            font-size: 40px;
             color: #66a0e2; /* フォントの色を青に設定 */
         }
         #question, #answer {
@@ -25,7 +25,6 @@
         }
         .button {
             width: calc(100% / 6); /* 画面幅を等分割する幅に調整 */
-            /*width: 100px;*/
             height: 100px;
             font-size: 24px;
             text-align: center;
@@ -38,7 +37,6 @@
             left: 0;
             width: 100%;
             background-color: #f0f0f0;
-            /*padding: 10px; */
             font-family: 'Kosugi', sans-serif;
             white-space: nowrap; /* テキストが折り返さないように設定 */
             overflow: hidden; /* テキストがボタンからはみ出ないように設定 */
@@ -46,7 +44,6 @@
         }
         /* "回答"ボタンのスタイル */
         .large-button {
-            /*max-width: 100%; */
             width: 120px; /* 幅を指定して、最大幅に達しない場合はこの幅を使用 */
             height: 100px;
             font-size: 50px;
@@ -90,22 +87,20 @@
         }
         /* 問題と回答の間のスペース */
         .spacer {
-            height: 50px; /* 適切なスペースの高さを設定 */
+            height: 10px; /* 適切なスペースの高さを設定 */
         }
     </style>
 </head>
 <body>
 <div id="startPopup" class="popup">
-    <!--<h3>ゲームスタート</h3>-->
-    <!--<button onclick="startGame()">スタート</button>-->
     <button class="start-button" onclick="startGame()">スタート</button>
 </div>
 <div id="gameContent" style="display: none;">
     <!-- ゲームのコンテンツや質問など -->
-    <h1>問題</h1>
+    <div class="header">問題</div>
     <div id="question">10人の乙女、用意したりしなかったりしたものは?</div>
     <div class="spacer"></div> <!-- 問題と回答の間のスペース -->
-    <h2>回答</h2>
+    <div class="header">回答</div>
     <div id="answer"></div>
 </div>
 
@@ -115,7 +110,6 @@
     <button onclick="restartGame()">再度プレイ</button>
 </div>
 <div id="backButton" class="popup" style="display: none;">
-    <!--<button onclick="goBack()">戻る</button>-->
     <button class="back-button" onclick="restartGame()">戻る</button>
 </div>
 
@@ -126,11 +120,9 @@
         <button class="large-button" onclick="appendCharacter('ラ')">ラ</button>
         <button class="large-button" onclick="appendCharacter('ハ')">ハ</button>
         <button class="large-button" onclick="appendCharacter('ム')">ム</button>
-        <!--<button class="large-button" onclick="clearCharacter()">×</button>-->
         <button class="large-button clear-button" onclick="clearCharacter()">×</button>
     </div>
     <div class="button-row">
-        <!--<button class="large-button" onclick="checkAnswer()">回答</button>-->
         <button class="large-button" id="checkAnswerButton" onclick="checkAnswer()">回答</button>
     </div>
 </div>
