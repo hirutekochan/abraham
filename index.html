@@ -7,9 +7,10 @@
         body {
             text-align: center;
             font-family: 'Kosugi', sans-serif;
+            padding-bottom: 100px; /* スタートと戻るボタンのための余白 */
         }
         h1, h2 {
-            margin: 0;
+            margin: 20px 0; /* 問題と回答の間に余白を追加 */
             padding: 10px;
             font-family: 'Kosugi', sans-serif;
             color: blue; /* フォントの色を青に設定 */
@@ -22,15 +23,16 @@
         .button-row {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap; /* ボタンが画面幅を超えた場合、折り返す */
         }
         .button {
-            /*width: calc(100% / 6);*/ /* 画面幅を等分割する幅に調整 */
-            width: 100px;
+            width: 120px;
             height: 100px;
-            font-size: 24px;
+            font-size: 50px;
             text-align: center;
-            line-height: 80px;
+            line-height: 100px;
             font-family: 'Kosugi', sans-serif;
+            margin: 10px; /* ボタンの間に余白を追加 */
         }
         .button-container {
             position: fixed;
@@ -58,13 +60,17 @@
             text-overflow: ellipsis; /* テキストがはみ出た場合に省略記号 (...) を表示 */
         }
         /* スタートボタンのスタイル */
-        .start-button {
+        .start-button, .back-button {
             width: 360px; /* ボタンの幅を調整 */
             height: 180px;
             font-size: 40px;
             text-align: center;
             line-height: 180px; /* ボタン内でテキストを垂直中央揃え */
             font-family: 'Kosugi', sans-serif;
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 10px;
         }
         /* "×"ボタンのスタイル */
         .clear-button {
@@ -75,14 +81,6 @@
             font-size: 50px;
             text-align: center;
             line-height: 100px;
-            font-family: 'Kosugi', sans-serif;
-        }
-        /* "戻る"ボタンのスタイル */
-        .back-button {
-            width: 200px; /* 幅を大きく設定 */
-            height: 100px; /* 高さを大きく設定 */
-            font-size: 40px; /* フォントサイズを大きく設定 */
-            line-height: 100px; /* テキストの中央揃え */
             font-family: 'Kosugi', sans-serif;
         }
 
@@ -126,111 +124,4 @@
     </div>
     <div class="button-row">
         <!--<button class="large-button" onclick="checkAnswer()">回答</button>-->
-        <button class="large-button" id="checkAnswerButton" onclick="checkAnswer()">回答</button>
-    </div>
-</div>
-
-<script>
-    let currentQuestion = 1;
-
-    const questions = [
-        "10人の乙女、用意したりしなかったりしたものは?",
-        "10の災い、4つめの災いは?",
-        "アブラハム、改名前の名前は?",
-        "2人の斥候を匿った遊女の名前は?",
-        "ノアの息子、セム、ヤペテ、もう一人は?",
-        "信仰の父は?"
-    ];
-    const answers = [
-        "アブラ",
-        "アブ",
-        "アブラム",
-        "ラハブ",
-        "ハム",
-        "アブラハム"
-    ];
-    let currentInput = "";
-
-    function appendCharacter(character) {
-        currentInput += character;
-        document.getElementById("answer").textContent = currentInput;
-    }
-
-    function clearCharacter() {
-        currentInput = currentInput.slice(0, -1);
-        document.getElementById("answer").textContent = currentInput;
-    }
-
-    function checkAnswer() {
-        if (currentInput === answers[currentQuestion - 1]) {
-            currentQuestion++;
-            if (currentQuestion <= questions.length) {
-                document.getElementById("question").textContent = questions[currentQuestion - 1];
-                currentInput = "";
-                document.getElementById("answer").textContent = "";
-            } else {
-                const endTime = new Date().getTime();
-                const elapsedTime = (endTime - startTime) / 1000;
-                alert("クリア！かかった時間：" + elapsedTime + "秒");
-                document.getElementById("gameContent").style.display = "none";
-                document.getElementById("backButton").style.display = "block";
-            }
-        } else {
-            currentInput = "";
-            document.getElementById("answer").textContent = "";
-        }
-    }
-
-    let startTime = new Date().getTime();
-    document.getElementById("question").textContent = questions[currentQuestion - 1];
-
-    // ゲーム開始ポップアップを表示する
-    function showStartPopup() {
-        document.getElementById("startPopup").style.display = "block";
-        document.getElementById("gameContent").style.display = "none"; // ゲームコンテンツを非表示
-        document.getElementById("backButton").style.display = "none"; // 戻るボタンを非表示
-    }
-
-    // ゲームを開始する
-    function startGame() {
-        document.getElementById("startPopup").style.display = "none";
-        document.getElementById("gameContent").style.display = "block"; // ゲームコンテンツを表示
-        document.getElementById("backButton").style.display = "none"; // 戻るボタンを非表示
-
-        // ゲームの初期化と問題の表示などの処理を追加
-        currentQuestion = 1;
-        document.getElementById("question").textContent = questions[currentQuestion - 1];
-        currentInput = "";
-        document.getElementById("answer").textContent = "";
-    }
-
-    // ゲーム終了時にポップアップを表示
-    function endGame() {
-        document.getElementById("popup").style.display = "block";
-        // ゲームの結果を表示する処理を追加
-    }
-
-    // ゲームを再度プレイするための処理
-    function restartGame() {
-        document.getElementById("popup").style.display = "none";
-        // ゲームを初期状態にリセットする処理を追加
-        currentQuestion = 1;
-        document.getElementById("question").textContent = questions[currentQuestion - 1];
-        currentInput = "";
-        document.getElementById("answer").textContent = "";
-        showStartPopup();
-    }
-
-    // 「戻る」ボタンをクリックしてゲームスタート画面に戻る
-    function goBack() {
-        document.getElementById("backButton").style.display = "none";
-        showStartPopup();
-    }
-
-    // ページ読み込み時にゲーム開始ポップアップを表示
-    window.onload = function() {
-        showStartPopup();
-    };
-</script>
-</body>
-</html>
+        <button class="large-button" id="checkAnswerButton" onclick
