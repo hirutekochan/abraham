@@ -23,15 +23,16 @@
             display: flex;
             justify-content: center;
         }
-        .button {
+/*        .button {
             width: calc(100% / 6); /* 画面幅を等分割する幅に調整 */
-            height: 180px;
+            /*height: 180px;*/
+            /*height: 240px;
             font-size: 50px;
             text-align: center;
             line-height: 180px;
             line-width: calc(100% / 6);
             font-family: 'Kosugi', sans-serif;
-        }
+        }*/
         .button-container {
             position: fixed;
             bottom: 0;
@@ -43,10 +44,12 @@
             overflow: hidden; /* テキストがボタンからはみ出ないように設定 */
             text-overflow: ellipsis; /* テキストがはみ出た場合に省略記号 (...) を表示 */
         }
-        /* "回答"ボタンのスタイル */
+        
         .large-button {
-            width: 200px; /* 幅を指定して、最大幅に達しない場合はこの幅を使用 */
-            height: 120px;
+            /*width: 200px; /* 幅を指定して、最大幅に達しない場合はこの幅を使用 */
+            width: calc(100% / 6); /* 画面幅を等分割する幅に調整 */
+            /*height: 120px;*/
+            height: 180px;
             font-size: 50px;
             text-align: center;
             line-height: 120px;
