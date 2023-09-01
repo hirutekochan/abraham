@@ -74,7 +74,7 @@
             background-color: red; /* 背景色を赤色に設定 */
             color: white; /* 文字色を白に設定 */
             width: 120px;
-            height: 100px;
+            height: 180px;
             font-size: 50px;
             text-align: center;
             line-height: 100px;
@@ -94,6 +94,12 @@
         .spacer {
             height: 80px; /* 適切なスペースの高さを設定 */
         }
+        /* ボタン間の隙間用のスタイル */
+        .button-spacing {
+            width: 20px; /* 適切な隙間の幅を設定 */
+            height: 100px;
+        }
+
     </style>
 </head>
 <body>
@@ -127,6 +133,7 @@
         <button class="large-button" onclick="appendCharacter('ム')">ム</button>
         <button class="clear-button" onclick="clearCharacter()">×</button>
     </div>
+    <div class="button-spacing"></div> <!-- 隙間用の要素を追加 -->
     <div class="button-row">
         <button class="large-button" id="checkAnswerButton" onclick="checkAnswer()">回答</button>
     </div>
